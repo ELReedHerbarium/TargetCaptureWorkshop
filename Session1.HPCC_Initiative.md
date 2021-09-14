@@ -39,11 +39,90 @@ ssh <eraider>@login.hpcc.ttu.edu
 Hit the enter key to run the line. You will then be prompted to input your eraider password. Once initialized, you will be connected to the cluster and able to run commands. 
 ## 1.3 Working in an Interactive System
 
+The 'interactive' command allows you to directly access a CPU or GPU. This allows the user to allocate resources. Nodes can also be directly interacted with. Additionally, by using an interactive session, results from our commands are displayed on the screen.
+
+
+HPCC has outlined the command and arguments below:
+> Command: 
+> interactive [-A] [-c] [-p] [-J] [-w] [-g] [-h]
+> 
+> Optional arguments:
+> 
+> -A: the account name
+> 
+> -c: number of CPU cores to request (default: 1)
+> 
+> -p: partition to run job in (default: nocona)
+> 
+> -J: job name (default: INTERACTIVE)
+> 
+> -w: node name
+> 
+> -g: number of GPU to request
+> 
+> -h: show this usage info
+
+For, now, lets use the default command for this portion of the workshop.
+
+```
+interactive
+```
 
 ## 1.4 Making a Hierarchy File System
+Lets try a few commands that allow you to visualize and organize your personal directory in command line.
 
+> ls   :     lists all directories in the directory you are currently in. Use 'ls' to identify folders in your current directory
+
+> mkdir     : Makes a new directory in the current directory you are in. 
+> 
+
+Go ahead and create a new directory to keep your data in for this tutorial. You can call it whatever you'd like, for tutorial purposes, we will call our's TC_Workshop. After youve created it, use the ls command to see it in your files.
+
+`mkdir [newname]`
+
+> cd  : Change Directory. You can use this command to move between directories in your terminal.
+
+Navigate to your new directory by using the cp command.
+```
+cd [newname]
+```
+You can return to your previous directory by using the entire path to the directory, of by using '..' which denotes the directory that yout current directory is in. Try moving around your terminal using these commands.
+
+```
+cd ../
+OR
+cd /scratch/[username]
+```
+```
+cd /TC_Workshop
+```
+If you get lost, try using the list command (ls) to get a hint about where you can move.
 ## 1.5 Copy Data Across Folders
 
+To demonstrate how to copy data between two folders, we will create a text file and copy it into an adjacent directory. Return to your directory that you just created (TC_Workshop). For the purposes of this tutorial, we will call our directory TC_Workshop. Make two new directories within the TCWorkshop directories, called Test1 and Test2.
+
+```
+mkdir Test1
+mkdir Test2
+```
+Navigate into the Test1 directory.
+```
+cd /Test1
+```
+To create a new text file, you can use the nano command.
+```
+nano
+```
+This command opens the default nano screen. Type any sort of message into the screen. To exit nano, use Control X. This then prompts you to name the file. If you use the 'ls' command, you can now see a text file in your Test1 directory. 
+
+Navigate to your Test2 directory using cd commands. Once you are in Test2, you can utilize the cp command to copy your textfile into this folder.
+
+```
+cp /scratch/username/TC_Workshop/Test1/filename.txt /scratch/username/TC_Workshop/Test2
+```
+to simplify this command further, we can use '.'. We used the double period ".." to define the parent directory earlier. Try using "." instead of the filepath to the Test2 directory.
+
+If you use the ls command in the Test2 directory, you should see a copy of the text file. You can open it with nano to see a copy of the same message you wrote previously. The cp command can be used across directories in your space, and other user's space on HPCC, as long as you have the pathname to retrieve the file.
 ## 1.6 Opening and Modifying Your /bashrc File
 
 ## 1.7 Running Singularity Containers
