@@ -88,10 +88,10 @@ cd [newname]
 ```
 You can return to your previous directory by using the entire path to the directory, of by using '..' which denotes the directory that yout current directory is in. Try moving around your terminal using these commands.
 
-```
+```bash=
 cd ../
 OR
-cd /scratch/[username]
+cd /lustre/scratch/[username]
 ```
 ```
 cd /TC_Workshop
@@ -118,7 +118,7 @@ This command opens the default nano screen. Type any sort of message into the sc
 Navigate to your Test2 directory using cd commands. Once you are in Test2, you can utilize the cp command to copy your textfile into this folder.
 
 ```
-cp /scratch/username/TC_Workshop/Test1/filename.txt /scratch/username/TC_Workshop/Test2
+cp /lustre/scratch/username/TC_Workshop/Test1/filename.txt /lustre/scratch/username/TC_Workshop/Test2
 ```
 to simplify this command further, we can use '.'. We used the double period ".." to define the parent directory earlier. Try using "." instead of the filepath to the Test2 directory.
 
