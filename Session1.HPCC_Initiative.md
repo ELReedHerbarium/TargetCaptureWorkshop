@@ -11,6 +11,8 @@ Welcome to the Texas Tech University 2021 Bioinformatics Workshop, held by the T
 
 [TOC]
 
+## 0.1 How to use this tutorial
+
 ## 1.1: Opening Your Terminal
 
 All computers allow you access to a terminal, which is a window that allows you to communicate with your computer, and command it to perform functions. All computers have a built in terminal. 
