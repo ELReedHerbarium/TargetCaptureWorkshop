@@ -19,7 +19,7 @@ In Windows, you can click the Start Icon in the bottom left on your screen. In t
 
 On a Mac, there are two methods to opening your terminal. First, you can use the Finder by clicking on the Finder logo, clicking Applications, opening the Utilities folder, and double clicking "terminal". You could also find the terminal by pressing the Command buttom and the space bar simultaneously. Type 'terminal' into the search bar, and then double click the terminal application to launch it.
 
-Many scientists who frequently use command line to process data for their research utilize "Gitbash", which can be downloaded [here](https://git-scm.com/downloads). Gitbash is available for macOS, Windows, and Linux/Unix system. The advantages that gitbash offers over your personal computer's terminal is that it understands a wider range of commands, making certain projects easier. 
+Many scientists who frequently use command line to process data for their research utilize "Gitbash", which can be downloaded [here](https://git-scm.com/downloads). Gitbash is available for macOS, Windows, and Linux/Unix system. The advantages that gitbash offers over your personal computer's terminal is that it understands a wider range of commands, making certain projects easier. We highly reccomend using GitBash for this tutorial, and the following sessions.
 
 
 ## 1.2 Logging into the Red Raider Cluster
@@ -125,6 +125,35 @@ to simplify this command further, we can use '.'. We used the double period ".."
 If you use the ls command in the Test2 directory, you should see a copy of the text file. You can open it with nano to see a copy of the same message you wrote previously. The cp command can be used across directories in your space, and other user's space on HPCC, as long as you have the pathname to retrieve the file.
 ## 1.6 Opening and Modifying Your /bashrc File
 
+BASH stands for Bourne Again Shell. A shell in command line interprets for the user, and is able to accept commands and run them. You will already find a file called .bashrc in your personal repository. Specifically, a .bashrc file is a shell script that will run immediately as you open a new shell. You can open a new shell by opening a new terminal, or commanding the bashrc file to run again. If you want specific commands to run everytime you open your terminal, placing them in .bashrc would be efficient. More advanced command line users will use the bashrc file to display system information when they open their terminal, or store 'aliases' which are personal shortcuts to long commands.
+
+To open and edit the .bashrc file, we can use the nano command we used in Secion 1.5. You will likely find your bashrc file in your first parent repository.
+
+```
+nano ~/.bashrc
+```
+To exemplify the function of .bashrc, lets type a command that will print a greeting when you open up your terminal.
+```
+echo [Your message]
+```
+Restart your terminal to see your greeting repeated, proving the function of your edited .bashrc file!
 ## 1.7 Running Singularity Containers
+Singularity is a software that allows the user to create a 'container' within their system in the cluster. The benefits of using a contained space when doing bioinformatics include:
+> 1. using software that is not installed on the system
+> 
+> 2. using software that is hard for user to install
+> 
+> 3. using software that only runs on a specific Linux distribution or version
+> 
+>4. sharing scientific pipeline in a reproducible way
+>
+>5. using full scientific pipelines shared by others
+
+*Source: [UCSF](https://wynton.ucsf.edu/hpc/software/singularity.html)*
+
+To initialize Singularity in your terminal, use this command:
+```
+module load singularity
+```
 
 ## 1.8 Downloading data from KEW database
