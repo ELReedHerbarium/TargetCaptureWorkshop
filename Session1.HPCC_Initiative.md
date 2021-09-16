@@ -12,7 +12,18 @@ Welcome to the Texas Tech University 2021 Bioinformatics Workshop, held by the T
 [TOC]
 
 ## 0.1 How to use this tutorial
+In each section, there will be example lines of code that has been proven to work. 
 
+`Code we write will look like this`
+
+At the end of each section, there will be space to input your own codes that you used to complete the tutorial. This is to encourage you to learn the structure of command writing, as opposed to copy and pasting the code given in the session.
+```
+When you see large grey boxes, this is where we would like you to write your own lines, so we can assist you if you have issues.
+```
+
+How To Read:
+
+Words in [brackets] is where we encourage you to be creative, or use your own username.
 ## 1.1: Opening Your Terminal
 
 All computers allow you access to a terminal, which is a window that allows you to communicate with your computer, and command it to perform functions. All computers have a built in terminal. 
@@ -35,9 +46,9 @@ You will be utilizing the new ['RedRaider' cluster](https://www.depts.ttu.edu/hp
 
 Once you have satisfied 'on-campus' requirements, you will type this command into the command line:
 
-```
-ssh <eraider>@login.hpcc.ttu.edu
-```
+
+`ssh [eraider]@login.hpcc.ttu.edu`
+
 Hit the enter key to run the line. You will then be prompted to input your eraider password. Once initialized, you will be connected to the cluster and able to run commands. 
 ## 1.3 Working in an Interactive System
 
@@ -66,9 +77,9 @@ HPCC has outlined the command and arguments below:
 
 For, now, lets use the default command for this portion of the workshop.
 
-```
+`
 interactive
-```
+`
 
 ## 1.4 Making a Hierarchy File System
 Lets try a few commands that allow you to visualize and organize your personal directory in command line.
@@ -84,44 +95,48 @@ Go ahead and create a new directory to keep your data in for this tutorial. You 
 
 > cd  : Change Directory. You can use this command to move between directories in your terminal.
 
-Navigate to your new directory by using the cp command.
-```
+Navigate to your new directory by using the cd command.
+
+`
 cd [newname]
-```
+`
+
 You can return to your previous directory by using the entire path to the directory, of by using '..' which denotes the directory that yout current directory is in. Try moving around your terminal using these commands.
 
-```bash=
-cd ../
-OR
-cd /lustre/scratch/[username]
-```
-```
-cd /TC_Workshop
-```
+
 If you get lost, try using the list command (ls) to get a hint about where you can move.
+
+```
+
+```
 ## 1.5 Copy Data Across Folders
 
 To demonstrate how to copy data between two folders, we will create a text file and copy it into an adjacent directory. Return to your directory that you just created (TC_Workshop). For the purposes of this tutorial, we will call our directory TC_Workshop. Make two new directories within the TCWorkshop directories, called Test1 and Test2.
 
 ```
-mkdir Test1
-mkdir Test2
+
 ```
 Navigate into the Test1 directory.
 ```
-cd /Test1
+
 ```
 To create a new text file, you can use the nano command.
-```
+
+`
 nano
-```
+`
+
 This command opens the default nano screen. Type any sort of message into the screen. To exit nano, use Control X. This then prompts you to name the file. If you use the 'ls' command, you can now see a text file in your Test1 directory. 
 
 Navigate to your Test2 directory using cd commands. Once you are in Test2, you can utilize the cp command to copy your textfile into this folder.
 
+`
+cp /lustre/scratch/username/TC_Workshop/Test1/filename.txt /lustre/scratch/username/TC_Workshop/Test2`
+
 ```
-cp /lustre/scratch/username/TC_Workshop/Test1/filename.txt /lustre/scratch/username/TC_Workshop/Test2
+
 ```
+
 to simplify this command further, we can use '.'. We used the double period ".." to define the parent directory earlier. Try using "." instead of the filepath to the Test2 directory.
 
 If you use the ls command in the Test2 directory, you should see a copy of the text file. You can open it with nano to see a copy of the same message you wrote previously. The cp command can be used across directories in your space, and other user's space on HPCC, as long as you have the pathname to retrieve the file.
@@ -131,12 +146,17 @@ BASH stands for Bourne Again Shell. A shell in command line interprets for the u
 
 To open and edit the .bashrc file, we can use the nano command we used in Secion 1.5. You will likely find your bashrc file in your first parent repository.
 
-```
+`
 nano ~/.bashrc
-```
+`
+
 To exemplify the function of .bashrc, lets type a command that will print a greeting when you open up your terminal.
-```
+
+`
 echo [Your message]
+`
+```
+
 ```
 Restart your terminal to see your greeting repeated, proving the function of your edited .bashrc file!
 ## 1.7 Running Singularity Containers
