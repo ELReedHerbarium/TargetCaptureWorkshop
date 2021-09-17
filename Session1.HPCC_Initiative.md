@@ -179,3 +179,19 @@ module load singularity
 ```
 
 ## 1.8 Downloading data from KEW database
+KEW Royal Botanic Gardens has an online repository of plant sequence data available to the public that you can download and upload to your HPCC space at no cost to you. In the last section of Session 1, we will show you how you can upload datasets to your HPCC space.
+
+Before we begin, open [this link](https://treeoflife.kew.org/) in your browser to explore the Kew Tree of Life page. Choose any species from the tree that interests you. Here are a few fun ideas:
+
+* *[Ephedra sinica](https://plants.sc.egov.usda.gov/home/plantProfile?symbol=EPSI3)*: Native to China, *Ephedra sinica* has been used as a traditional plant medicine for thousands of years. Native americans used other *Ephedra* species to treat colds and flus. *Ephedra* species create the bioactive compounds ephedrine and pseudoephedrine, which are the main active ingredient in the drug Sudafed.
+
+![Ephedra](https://i.imgur.com/gGajs0O.jpg)
+* [*Vanilla planifolia*](https://plants.sc.egov.usda.gov/home/plantProfile?symbol=EPSI3): The vanilla orchid, as indicated by its Genus, creates the long black vanilla 'beans' that are used in cooking. The vanilla orchid scales trees or other structures in their native habitat, and must be hand pollinated by horticulturists in order to produce a pod, which contributes to their high price.
+
+![](https://i.imgur.com/jd1UoBs.jpg)
+
+* [*Machaeranthera tanacetifolia*](https://plants.sc.egov.usda.gov/home/plantProfile?symbol=MATA2): The Tahoka Daisy is in the sunflower family (Asteraceae). First discovered in 1898 at [Tahoka Lake](https://tahokalakepasture.blogspot.com/), just SE of Lubbock, the Tahoka daisy captured the hearts of the locals, who then brought it to the international seed market as a hardy wildflower.
+
+![](https://i.imgur.com/CTnq7yw.jpg)
+
+You will also need to download the free application [Cyberduck](https://cyberduck.io/download/) to your computer. FTP stands for File Transfer Protocol. This will allow you to transfer your Kew file to the cluster using Cyberduck's GUI.
