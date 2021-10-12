@@ -1,7 +1,7 @@
 # SESSION 3: HybPiper
 [TOC]
 
-## 3.1 Running HybPiper with standard settings
+## 3.1 Running HybPiper
 The [HybPiper](https://github.com/mossmatters/HybPiper/blob/master/README.md) bioinformatics pipeline is designed to assemble target capture data, which is when extracted DNA is probed for genes regions of interest. Hybpiper is composed of numerous python scripts that use bioinformatics tools (like BLAST, EXONERATE, and GNU Parallel), to make assembling sequences easier for the user.
 
 HybPiper runs the following tools in this order:
@@ -104,12 +104,27 @@ This is the usage for `hybpiper.py`
 
 ### Retrieving Sequences
 
-### Cleaning up
+The `retrieve_sequences.py` script will show us which sequeces from which sample mapped to a given gene. This script will take all runs from HybPiper (`reads_first.py`), and retrieves the gene names from the target file, creating a output fasta file for each gene.
 
+python ../retrieve_sequences.py [target files].fasta . [sequence type]
+
+This script can use protein sequences, or animo acid sequences to create the fasta. In the place of [sequence type], you can choose `aa` or `dna`.
+
+```
+
+```
+### Cleaning Up
+
+HybPiper creates a lot of files we dont want to clog up the cluster. This step will ensure that we save space. 
+
+python ../cleanup.py [HybPiper Output file]
+
+```
+
+```
 ## 3.2 Find the Helper script in HybPiper
 
-## 3.3 Change the flags/options
-
+If you are ever having tr
 
 
 
