@@ -13,6 +13,8 @@ HybPiper runs the following tools in this order:
 
 To get started, we need to either locate and move files, or create them. First, we will need a fasta file containing the target genes selected for the dataset. For example, when using the Angiosperms353 Target capture kit, we should use the target file called Mega353.fasta. Your target file, if used with a specific kit, can be downloaded from online and FTPed using CyberDuck into your terminal. If you have made your own probes, you will have to create this file yourself. Use the space below to show how you will move the target file into your working directory.
 
+#### Action 3.1.1
+
 ```
 
 ```
@@ -20,6 +22,17 @@ To get started, we need to either locate and move files, or create them. First, 
 ### Creating a Namelist
 
 Second, we will need to create a namelist text file to help the pipeline run smoothly. While this is not required to run the program, it makes running multiple samples easier. Use the `nano` command to create a .txt file that has sample names, one per line.
+
+#### Action 3.1.2
+```
+
+```
+
+### Activating Singularity
+
+Help here
+
+#### Action 3.1.3
 ```
 
 ```
@@ -41,6 +54,8 @@ With these two files, we are able to run the first HybPiper command, `reads_firs
 > the -b, -r, and --prefix are flags that organize and direct the command.
 
 Try running `reads_first.py` by yourself, with the correct filenames.
+
+#### Action 3.1.4
 ```
 
 ```
@@ -49,17 +64,18 @@ Try running `reads_first.py` by yourself, with the correct filenames.
 
 Hybpiper runs each set of reads independently, meaning that we could continue to run `reads_first.py` for each set of data. However, if you wanted to run an entire plate of samples, this process would become quite time consuming. Lets write a simple script to run all of our samples at once.
 
-`
-while read name; 
-do ../reads_first.py -b test_targets.fa -r $name*.fastq --prefix $name --bwa
-done < namelist.txt
-`
+```bash=
+while read name 
+do 
+reads_first.py -b test_targets.fa -r $name*.fastq --prefix $name --bwa
+done
+```
 
 
 A while loop is statement that allows for a command to be repeated. We are able to create this while loop because the namelist.txt file acts as a variable for filenames, in addition to setting the  --prefix flag. While loops and the namelist text file will be utilized later in this tutorial when we want to analyze the HybPiper output data.
 
 ### Supercontigs
-A supercontig is a ordered set of contigs, creating a portion of the genome. A singular contig is a continuous length of sequence that we are very sure the order of bases is. A supercontig is a larger portion of the genome reconstructed using these smalled contigs, creating a sequence with a few gaps. Hybpiper assembled these supercontigs when we run `reads_first.py` .
+A supercontig is a ordered set of contigs, creating a portion of the genome. A singular contig is a continuous length of sequence that we are very sure the order of bases is. A supercontig is a larger portion of the genome reconstructed using these smalled contigs, creating a sequence with a few gaps. Hybpiper assembled these supercontigs when we run `reads_first.py` . While `reads_first.py` creates the supercontig, if you wish to extract them, you must use `intronerate.py`. 
 
 ### Getting Sequence Lengths
 
@@ -69,6 +85,7 @@ To get a quick visual summary of our data thus far, we can use `get_seq_lengths.
 
 Replace the example arguments with your own, and run the command.
 
+#### Action 3.1.5
 ```
 
 ```
@@ -97,7 +114,8 @@ Getting a summary of statistics for our assembled reads is easy using the `hybpi
 This is the usage for `hybpiper.py`
 
 `python hybpiper_stats.py [YourSeqLengths].txt [namelist].txt > [Your summary Statistics].txt`
-
+Write code to get the summary statistics below.
+#### Action 3.1.6
 ```
 
 ```
@@ -110,6 +128,8 @@ python ../retrieve_sequences.py [target files].fasta . [sequence type]
 
 This script can use protein sequences, or animo acid sequences to create the fasta. In the place of [sequence type], you can choose `aa` or `dna`.
 
+Use the `retrieve_sequences.py` script below.
+#### Action 3.1.7
 ```
 
 ```
@@ -117,14 +137,18 @@ This script can use protein sequences, or animo acid sequences to create the fas
 
 HybPiper creates a lot of files we dont want to clog up the cluster. This step will ensure that we save space. 
 
-python ../cleanup.py [HybPiper Output file]
+`python ../cleanup.py [HybPiper Output file]`
+
+Adapt the code to fit your file
+
+#### Action 3.1.8
 
 ```
 
 ```
 ## 3.2 Find the Helper script in HybPiper
 
-If you are ever having tr
+If you are ever having trouble with the arguments of a command, try using any of the HybPiper helper scripts. For any of the python scripts we have used  this tutorial, you can follow the main script by -h to print out detailed help on your screen. For example, `reads_first.py -h`.
 
 
 
