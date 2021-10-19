@@ -32,9 +32,11 @@ SOURCE: [Kennedy Krieger Institute](https://www.kennedykrieger.org/research/cent
 Bioinformatics is inherintly associated to biology research. However, the use of bioinformatics is not limited to the subjects covered in this tutorial. While it has prevalent use in genomics and genetics projects, computational skills utilized in this workshop can be applied to research in nearly all discliplines within biology. Not only is processing data from wet lab part of bioinformatics, but the visualization of data is a major aspect of bioinformatics work. 
 
 ## 2.3 Examples of Bioinformatic Projects
-Bioinformatics is a merger of Biology, mathematics, and computer sciences. Bioinformatics projects could include nearly any project revolving around the whole genome, scaled all the way down to specific genes and RNA. Bioinformatics can even be used to analyze the structure of a molecule.Bioinformatic projects also include methods development, like creating primers and optimizing data processing.
+Bioinformatics is a merger of Biology, mathematics, and computer sciences. Bioinformatics projects could include nearly any project revolving around the whole genome, scaled all the way down to specific genes and RNA. Bioinformatics can even be used to analyze the structure of a molecule. Bioinformatic projects also include methods development, like creating primers and optimizing data processing.
 
-## 2.4 Opening a FASTA file
+Instructors at the workshop will tell you about their projects using bioinformatics, and what impacts their bioinformatics work has had on the field of Biology.
+
+## 2.4 Opening and Viewing a FASTA file
 
 Last week, we downloaded a file from the KEW Tree of Life, which should be in your home directory. In this session we will open it in the command line.
 
@@ -51,10 +53,6 @@ While zipped files could look like this
 `
 testdataset.fa.gz
 `
-### Viewing remote files
-
-`head`, `tail`, `less`
-
 
 'gz' indicates that the file is 'gzipped'. We can unzip the file using the `gunzip` command, followed by the file name.
 
@@ -64,9 +62,12 @@ testdataset.fa.gz
 
 ```
 
-After the file is unzipped, we can view it using the `less` command, followed by the file name. Use the enter key to travel down the file line by line
+After the file is unzipped, we can view it using the `less` command, followed by the file name. Use the enter key to travel down the file line by line. 
+
+You can also use the commands `head` and `tail`. These commands are convenient for large files, as they print the first 10 lines on the screen, from either the top or the bottom, depending on which command you use.
+
 ### Action 2.4.2
-*Use the less command to view the file*
+*Use the `head`, `tail`, and `less` command to view the file*
 ```
 
 ```
@@ -84,13 +85,14 @@ FastQC is a tool used to perform quality control functions on untrimmed sequence
 
 FastQC accepts multiple input fastp files at once. This is a good opportunity to utilize the 'wildcard' `*` syntax. Using a star in place of a filename, or part of a filename, will tell the ternimal that you want to run all samples that match the remaining descriptors. For example, `*.fasta` will refer to all files that have the extention .fasta. Additionally, SampleNumber*.fasta will refer to all files that start with 'SampleNumber' and end with the .fasta extension. Using a wildcard will be very helpful when you have a large dataset.
 
-Try writing a line of code below that prompts FastQC to create an output file. Below are the arguments:
+Below are the arguments:
 
 >  fastqc [-o output dir] [--(no)extract] [-f fastq|bam|sam] 
            [-c contaminant file] seqfile1 .. seqfileN
 
 
 ### Action 2.6.1
+*Try writing a line of code below that prompts FastQC to create an output file.*
 ```
 
 
@@ -118,9 +120,9 @@ SOURCE: [OpenGene/ FastP Github Page](https://github.com/OpenGene/fastp)
 
 In addition to the simple usage of FastP, we also need to add additional arguments for the type of data we have. The instructors will inform you of additional arguments needed based on the data set you use.
 
-Try adapting the simple usage code for your dataset.
 
 ### Action 2.8.1
+*Try adapting the simple usage code for your dataset.*
 ```
 
 
