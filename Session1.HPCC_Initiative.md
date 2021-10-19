@@ -24,15 +24,24 @@ When you see large grey boxes, this is where we would like you to write your own
 How To Read:
 
 Words in [brackets] is where we encourage you to be creative, or use your own username.
+
+## 0.2 Installing software
+
+Windows: [GitBash](https://gitforwindows.org/), [Cyberduck](https://cyberduck.io/download/), [Notepad++](https://notepad-plus-plus.org/downloads/)
+
+Mac: [Cyberduck](https://cyberduck.io/download/), [BBEdit](https://www.barebones.com/products/bbedit/index.html)
+
+
+
 ## 1.1: Opening Your Terminal
 
 All computers allow you access to a terminal, which is a window that allows you to communicate with your computer, and command it to perform functions. All computers have a built in terminal. 
 
-In Windows, you can click the Start Icon in the bottom left on your screen. In the search field, you can type 'terminal', 'cmd', or 'Command Prompt' and the application Command Prompt will appear. Alternatively, you can access Windows Powershell by right clicking on the Start Icon, and finding the application on the menu. Powershell is Windows' "modern command shell that includes the best features of other popular shells".
+In **Windows**, you can click the Start Icon in the bottom left on your screen. In the search field, you can type 'terminal', 'cmd', or 'Command Prompt' and the application Command Prompt will appear.
 
-On a Mac, there are two methods to opening your terminal. First, you can use the Finder by clicking on the Finder logo, clicking Applications, opening the Utilities folder, and double clicking "terminal". You could also find the terminal by pressing the Command buttom and the space bar simultaneously. Type 'terminal' into the search bar, and then double click the terminal application to launch it.
+On a **Mac**, there are two methods to opening your terminal. First, you can use the Finder by clicking on the Finder logo, clicking Applications, opening the Utilities folder, and double clicking "terminal". You could also find the terminal by pressing the Command buttom and the space bar simultaneously. Type 'terminal' into the search bar, and then double click the terminal application to launch it.
 
-Many scientists who frequently use command line to process data for their research utilize "Gitbash", which can be downloaded [here](https://git-scm.com/downloads). Gitbash is available for macOS, Windows, and Linux/Unix system. The advantages that gitbash offers over your personal computer's terminal is that it understands a wider range of commands, making certain projects easier. We highly reccomend using GitBash for this tutorial, and the following sessions.
+Many scientists who frequently use command line to process data for their research utilize "Gitbash", which can be downloaded [here](https://git-scm.com/downloads). We heavily suggest downloading and using Gitbash for this tutorial. Gitbash is available for macOS, Windows, and Linux/Unix system. The advantages that gitbash offers over your personal computer's terminal is that it understands a wider range of commands, making certain projects easier. We highly reccomend using GitBash for this tutorial, and the following sessions.
 
 
 ## 1.2 Logging into the Red Raider Cluster
@@ -80,7 +89,12 @@ For, now, lets use the default command for this portion of the workshop.
 `
 interactive
 `
+For practicing using an interactive session, follow the command with a `-p`.
+### Action 1.3.1
+*Initiate an interactive session in your terminal.*
+```
 
+```
 ## 1.4 Making a Hierarchy File System
 Lets try a few commands that allow you to visualize and organize your personal directory in command line.
 
@@ -104,43 +118,65 @@ cd [newname]
 You can return to your previous directory by using the entire path to the directory, of by using '..' which denotes the directory that yout current directory is in. Try moving around your terminal using these commands.
 
 
-If you get lost, try using the list command (ls) to get a hint about where you can move.
+
+
+### Action 1.4.1
+
+*If you get lost, try using the list command (ls) to get a hint about where you can move.*
 
 ```
 
+
 ```
+
+
 ## 1.5 Copy Data Across Folders
 
 To demonstrate how to copy data between two folders, we will create a text file and copy it into an adjacent directory. Return to your directory that you just created (TC_Workshop). For the purposes of this tutorial, we will call our directory TC_Workshop. Make two new directories within the TCWorkshop directories, called Test1 and Test2.
 
+### Action 1.5.1
+
+*Make a new directory called `TCWorkshop`*
+
+```
+
+```
+
+### Action 1.5.2
+
+*Navigate into the `TCWorkshop` directory and create two new directories called `Test1` and `Test2`.*
+
 ```
 
 ```
-Navigate into the Test1 directory.
-```
 
-```
-To create a new text file, you can use the nano command.
+**Expected Results**
 
-`
-nano
-`
 
-This command opens the default nano screen. Type any sort of message into the screen. To exit nano, use Control X. This then prompts you to name the file. If you use the 'ls' command, you can now see a text file in your Test1 directory. 
 
-Navigate to your Test2 directory using cd commands. Once you are in Test2, you can utilize the cp command to copy your textfile into this folder.
+## 1.6 Creating new text files
+
+To create a new text file, you can use the `nano` command.
+
+This command opens the default `nano` screen. Type any sort of message into the screen. To exit `nano`, use Control X. This then prompts you to name the file. If you use the `ls` command, you can now see a text file in your Test1 directory.
+
+### Action 1.6.1
+
+Navigate to your Test2 directory using `cd` commands. Once you are in Test2, you can utilize the `cp` command to copy your textfile into this folder.
 
 `
 cp /lustre/scratch/username/TC_Workshop/Test1/filename.txt /lustre/scratch/username/TC_Workshop/Test2`
 
+### Action 1.6.2
+*Adapt the cp command to your workshop folder and file names.*
 ```
 
 ```
 
-to simplify this command further, we can use '.'. We used the double period ".." to define the parent directory earlier. Try using "." instead of the filepath to the Test2 directory.
+To simplify this command further, we can use `.`. We used the double period `..` to define the parent directory earlier. Try using `.` instead of the filepath to the Test2 directory.
 
 If you use the ls command in the Test2 directory, you should see a copy of the text file. You can open it with nano to see a copy of the same message you wrote previously. The cp command can be used across directories in your space, and other user's space on HPCC, as long as you have the pathname to retrieve the file.
-## 1.6 Opening and Modifying Your /bashrc File
+## 1.7 Opening and Modifying Your /bashrc File
 
 BASH stands for Bourne Again Shell. A shell in command line interprets for the user, and is able to accept commands and run them. You will already find a file called .bashrc in your personal repository. Specifically, a .bashrc file is a shell script that will run immediately as you open a new shell. You can open a new shell by opening a new terminal, or commanding the bashrc file to run again. If you want specific commands to run everytime you open your terminal, placing them in .bashrc would be efficient. More advanced command line users will use the bashrc file to display system information when they open their terminal, or store 'aliases' which are personal shortcuts to long commands.
 
@@ -155,11 +191,14 @@ To exemplify the function of .bashrc, lets type a command that will print a gree
 `
 echo [Your message]
 `
+
+### Action 1.7.1
+*Use `echo` to create a greeting message.*
 ```
 
 ```
 Restart your terminal to see your greeting repeated, proving the function of your edited .bashrc file!
-## 1.7 Running Singularity Containers
+## 1.8 Running Singularity Containers
 Singularity is a software that allows the user to create a 'container' within their system in the cluster. The benefits of using a contained space when doing bioinformatics include:
 > 1. using software that is not installed on the system
 > 
@@ -174,12 +213,18 @@ Singularity is a software that allows the user to create a 'container' within th
 *Source: [UCSF](https://wynton.ucsf.edu/hpc/software/singularity.html)*
 
 To initialize Singularity in your terminal, use this command:
-```
+`
 module load singularity
-```
+`
 
-## 1.8 Downloading data from KEW database
-KEW Royal Botanic Gardens has an online repository of plant sequence data available to the public that you can download and upload to your HPCC space at no cost to you. In the last section of Session 1, we will show you how you can upload datasets to your HPCC space.
+## 1.9 Transferring data to/from HPCC
+
+### Downloading data from KEW database
+KEW Royal Botanic Gardens has an online repository of plant sequence data available to the public that you can download and upload to your HPCC space at no cost to you. The Kew Tree of Life Explorer is important to genomicists globally, as their data is stored and available for use by other scientists after publication. In the last section of Session 1, we will show you how you can upload datasets to your HPCC space.
+
+> The Kew Tree of Life Explorer is an output of the Plant and Fungal Trees of Life Project (PAFTOL) at the Royal Botanic Gardens, Kew. PAFTOL aims to discover and disseminate the evolutionary history of all plant and fungal genera. The evolutionary tree of life is fundamental to our understanding of the natural world. Comparative studies of DNA sequence data have revolutionised our knowledge of the tree of life, however many gaps remain. In collaboration with partners from around the world, PAFTOL is addressing this challenge by generating, compiling and analysing genomic data for all ca. 13,900 flowering plant and 8,200 fungal genera to build novel trees of life at unprecedented scale.
+
+SOURCE: [Kew Royal Botanic Gardens](https://treeoflife.kew.org/about)
 
 Before we begin, open [this link](https://treeoflife.kew.org/) in your browser to explore the Kew Tree of Life page. Choose any species from the tree that interests you. Here are a few fun ideas:
 
@@ -195,3 +240,4 @@ Before we begin, open [this link](https://treeoflife.kew.org/) in your browser t
 ![](https://i.imgur.com/CTnq7yw.jpg)
 
 You will also need to download the free application [Cyberduck](https://cyberduck.io/download/) to your computer. FTP stands for File Transfer Protocol. This will allow you to transfer your Kew file to the cluster using Cyberduck's GUI.
+
