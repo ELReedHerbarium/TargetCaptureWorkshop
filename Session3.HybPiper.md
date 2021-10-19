@@ -11,19 +11,19 @@ HybPiper runs the following tools in this order:
 
 ### Accessing your Target File
 
-To get started, we need to either locate and move files, or create them. First, we will need a fasta file containing the target genes selected for the dataset. For example, when using the Angiosperms353 Target capture kit, we should use the target file called Mega353.fasta. Your target file, if used with a specific kit, can be downloaded from online and FTPed using CyberDuck into your terminal. If you have made your own probes, you will have to create this file yourself. Use the space below to show how you will move the target file into your working directory.
-
+To get started, we need to either locate and move files, or create them. First, we will need a fasta file containing the target genes selected for the dataset. For example, when using the Angiosperms353 Target capture kit, we should use the target file called Mega353.fasta. Your target file, if used with a specific kit, can be downloaded from online and FTPed using CyberDuck into your terminal. If you have made your own probes, you will have to create this file yourself.
 #### Action 3.1.1
-
+ *Use the space below to show how you will move the target file into your working directory.*
 ```
 
 ```
 
 ### Creating a Namelist
 
-Second, we will need to create a namelist text file to help the pipeline run smoothly. While this is not required to run the program, it makes running multiple samples easier. Use the `nano` command to create a .txt file that has sample names, one per line.
+Second, we will need to create a namelist text file to help the pipeline run smoothly. While this is not required to run the program, it makes running multiple samples easier.
 
 #### Action 3.1.2
+*Use the `nano` command to create a .txt file that has sample names, one per line.*
 ```
 
 ```
@@ -53,9 +53,8 @@ With these two files, we are able to run the first HybPiper command, `reads_firs
 > -bwa should be used when neucleotides are used in the target files or input files.
 > the -b, -r, and --prefix are flags that organize and direct the command.
 
-Try running `reads_first.py` by yourself, with the correct filenames.
-
 #### Action 3.1.4
+*Try running `readsfirst.py` by yourself, with the correct filenames.*
 ```
 
 ```
@@ -83,9 +82,8 @@ To get a quick visual summary of our data thus far, we can use `get_seq_lengths.
 
 `python ../get_seq_lengths.py [Hybpiper output files].fasta [namelist].txt dna > [Seq Lengths output filename].txt`
 
-Replace the example arguments with your own, and run the command.
-
 #### Action 3.1.5
+*Replace the example arguments with your own, and run the command.*
 ```
 
 ```
@@ -114,8 +112,9 @@ Getting a summary of statistics for our assembled reads is easy using the `hybpi
 This is the usage for `hybpiper.py`
 
 `python hybpiper_stats.py [YourSeqLengths].txt [namelist].txt > [Your summary Statistics].txt`
-Write code to get the summary statistics below.
+
 #### Action 3.1.6
+*Write code to get the summary statistics.*
 ```
 
 ```
@@ -128,8 +127,8 @@ python ../retrieve_sequences.py [target files].fasta . [sequence type]
 
 This script can use protein sequences, or animo acid sequences to create the fasta. In the place of [sequence type], you can choose `aa` or `dna`.
 
-Use the `retrieve_sequences.py` script below.
 #### Action 3.1.7
+*Use the `retrievesequences.py` script.*
 ```
 
 ```
@@ -139,10 +138,8 @@ HybPiper creates a lot of files we dont want to clog up the cluster. This step w
 
 `python ../cleanup.py [HybPiper Output file]`
 
-Adapt the code to fit your file
-
 #### Action 3.1.8
-
+*Adapt the code to fit your output file*
 ```
 
 ```
