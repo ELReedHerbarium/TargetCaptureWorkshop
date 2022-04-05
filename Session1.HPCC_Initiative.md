@@ -4,7 +4,7 @@
 
 ---
 
-Welcome to the Texas Tech University 2021 Bioinformatics Workshop, held by the TTU Chapter Botanical Society Association. The first session of the series will guide you through the very first steps of using Texas Tech's High Performance Computer Cluster and navigating yourn personal space within the cluster. We will finish off by downloading sequence data from the KEW database.
+Welcome to the Texas Tech University 2021 Bioinformatics Workshop, held by the West Texas Association for Botany (WTAB), which is also the TTU student chapter of the Botanical Society of America. The first session of the series will guide you through the very first steps of using Texas Tech's High Performance Computer Cluster and navigating your personal space within the cluster. We will finish off by downloading sequence data from the KEW database.
 
 ---
 
@@ -23,15 +23,6 @@ When you see large grey boxes, this is where we would like you to write your own
 How To Read:
 
 Words in [brackets] is where we encourage you to be creative, or use your own username.
-
-## 0.2 Installing software
-
-[MOVE THIS TO A NEW DOCUMENT ALONG WITH HPCC ACCOUNT INSTRUCTIONS] (link to document here)
-
-Windows: [GitBash](https://gitforwindows.org/), [Cyberduck](https://cyberduck.io/download/), [Notepad++](https://notepad-plus-plus.org/downloads/)
-
-Mac: [Cyberduck](https://cyberduck.io/download/), [BBEdit](https://www.barebones.com/products/bbedit/index.html)
-
 
 
 ## 1.1: Opening Your Terminal
@@ -94,20 +85,20 @@ For, now, lets use the default command for this portion of the workshop, which r
 ```
 
 ```
-## 1.4 Making a Hierarchy File System
+## 1.4 Navigating The File System
 Lets try a few commands that allow you to visualize and organize your personal directory in command line.
 
-> `pwd`: Print the working directory. Think of this command as "Where am I?"
-> 
-> `ls`   :     lists all directories in the directory you are currently in. Use `ls` to identify folders in your current directory. Think of this command as "what's here?"
->> example: `ls [dirname]`
->> 
-> `mkdir`     : Makes a new directory in the current directory you are in. 
-> > example: `mkdir [newname]`
-> > 
-> `cd`  : Change Directory. You can use this command to move between directories in your terminal. Think of this command as "go here."
->> example: `cd [newname]`
->> 
+ `pwd`: Print the working directory. Think of this command as "Where am I?"
+ 
+`ls`   :     lists all directories in the directory you are currently in. Use `ls` to identify folders in your current directory. Think of this command as "what's here?"
+> example: `ls [dirname]`
+ 
+ `mkdir`     : Makes a new directory in the current directory you are in. 
+> example: `mkdir [newname]`
+ 
+`cd`  : Change Directory. You can use this command to move between directories in your terminal. Think of this command as "go here."
+example: `cd [newname]`
+
 
 There are several shortcuts to common places within the file system:
 
@@ -317,17 +308,4 @@ Although you can download data from Kew to your computer, you will need an FTP (
 * [Cyberduck](https://cyberduck.io/download/) 
 * [Bitvise](https://www.bitvise.com/ssh-client-download) 
 
-**[Need Bitvise instructions]**
 
-## 1.8 Running Singularity Containers **[MOVE TO SESSION 2]**
-Singularity is a software that allows the user to create a 'container' within their system in the cluster. The benefits of using a contained space when doing bioinformatics include:
-
-1. using software that is not installed on the system
-2. using software that is hard for user to install
-3. using software that only runs on a specific Linux distribution or version
-4. sharing scientific pipeline in a reproducible way
-5. using full scientific pipelines shared by others
-
-*Source: [UCSF](https://wynton.ucsf.edu/hpc/software/singularity.html)*
-
-**[ADD SMALL TUTORIAL ON RUNNING HYBPIPER CONTAINER]**
