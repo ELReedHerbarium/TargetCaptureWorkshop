@@ -1,3 +1,4 @@
+###### tags: `target_capture_workshop`
 # SESSION 2: BIOINFORMATICS IN PLANT RESEARCH AND SEQUENCE FILES
 
 [TOC]
@@ -14,7 +15,7 @@ While the bioinformatics portion of a research project is challenging by itself,
 
 Fieldwork and collections takes a long time to plan and perform, especially if your collections will require extensive travel and funding. Careful consideration into species selection, permit applications, and storage will be required. As a bioinformaticist, why would this be critical to your role on the project? You should make yourself aware of the condition of your collection- are you using degraded herbarium specimens? Do you have enough of a sample to be able to rerun if recovery is poor?
 
-Botanists are encouraged to create vouchers for collections made, is order to store and preserve the physical and chemical properties of the samples long-term. Each sample taken during field work must be recorded and given a unique identifier, in order to connect the specimen to the sequencing data. Your work in bioinformatics may have to be retracable to specific specimens.
+Botanists are encouraged to create vouchers for collections made, in order to store and preserve the physical and chemical properties of the samples long-term. Each sample taken during field work must be recorded and given a unique identifier, in order to connect the specimen to the sequencing data. Your work in bioinformatics may have to be retracable to specific specimens.
 
 Wet lab procedures, including enzymatic fragmentation, pooling, concentration, will affect either the quality of data, or the way your data can be interpreted bioinformatically.
 
@@ -36,28 +37,58 @@ Bioinformatics is a merger of Biology, mathematics, and computer sciences. Bioin
 
 Instructors at the workshop will tell you about their projects using bioinformatics, and what impacts their bioinformatics work has had on the field of Biology.
 
-## 2.4 Opening and Viewing a FASTA file
+## 2.4 Short Reads Sequencing
+
+When we sequence short reads, we mean that the genomic code (DNA) has been fragmented into small chunks, called 'reads'. We do this because we are unable to sequence very long stretches of DNA, and could potentially lose data. In the wetlab procedure, DNA extraction materials are fragmented with an enzyme called fragmentase. The seqments are amplified using PCR, and then paired together in the library preparation step. This is why data rendered from sequencing will have two files for one sample. One is the forward read, and one is the reverse read. 
+
+![SOURCE: https://thesequencingcenter.com/knowledge-base/what-are-paired-end-reads/](https://i.imgur.com/fR9x2vr.jpg)
+SOURCE: [The Sequencing Center](https://thesequencingcenter.com/knowledge-base/what-are-paired-end-reads/)
+
+## 2.5 Opening and Viewing a FASTQ and FASTA files
 
 Last week, we downloaded a file from the KEW Tree of Life, which should be in your home directory. In this session we will open it in the command line.
 
 A FASTA file is a file format that stores sequence data on nucleic acids or protein sequences. This file format allows the user to add comments or notations. The FASTA file format is in text format, which means we are able to open and view it.
 
-To view the KEW Tree of life sequence , we will need to unzip the fasta file first. Unzipped FASTA files look like this:
+A FASTQ file is also a text format, but contains the raw or modified output of DNA sequencers, such as the Illumina system. Each sequence in a FASTQ file is known as a "read" and is represented by four lines:
 
-`
-KEWsequence.fasta
-`
+1. The identifier for the read
+2. The DNA sequence
+3. A placeholder line, usually just a `+` character
+4. [Quality scores represented by a single character.](https://en.wikipedia.org/wiki/Phred_quality_score)
 
-While zipped files could look like this
+Return to the [Kew Tree of Life website](https://treeoflife.kew.org/) and select a species to download the raw sequences. For this exercise it will be best to select a seqeunce where the first column says `PAFTOL`.
 
-`
-testdataset.fa.gz
-`
+After clicking on your chosen species, follow the `Data Access link` to the data repository where the raw sequence data is stored. The files will be named with the extension `.fastq.gz` You will download **two files** for your chosen species - these will be explained in more detail in the next section. 
 
-'gz' indicates that the file is 'gzipped'. We can unzip the file using the `gunzip` command, followed by the file name.
+Right-click on the link to the `.fastq.gz` file and use `wget` to download the file to the `TC_Workshop` directory  you made in the last session. Repeat this for the other file.
 
-### Action 2.4.1
-*Use the gunzip comand to unzip your file*
+**Expected Results**
+
+After downloading both read files for your sample, your `TC_Workshop` directory should look something like this:
+
+```
+[cpu-23-37 TC_workshop]$ ls
+INSDC.ERR5034798.Afrofittonia_silvestris.a353.fasta  Test1
+SRR7451100_1.fastq.gz                                Test2
+SRR7451100_2.fastq.gz
+```
+
+'gz' indicates that the file is 'gzipped' or compressed. To view the KEW Tree of life sequence , we will need to unzip the FASTQ file first using the `gunzip` command, followed by the file name. 
+
+Unzipped FASTQ files look like this: 
+`ERR5033410_1.fastq` `ERR5033410_1.fastq`
+
+Zipped FASTA files look like this:
+`KEWsequence.fasta.gz`
+
+Unzipped FASTA files look like this:
+`KEWsequence.fasta`
+
+
+
+### Action 2.5.1: gunzip
+*Use the `gunzip` comand to unzip your files*
 ```
 
 ```
@@ -66,19 +97,35 @@ After the file is unzipped, we can view it using the `less` command, followed by
 
 You can also use the commands `head` and `tail`. These commands are convenient for large files, as they print the first 10 lines on the screen, from either the top or the bottom, depending on which command you use.
 
-### Action 2.4.2
+### Action 2.5.2: Exploring FASTA/FASTQ files
 *Use the `head`, `tail`, and `less` command to view the file*
 ```
 
 ```
 
-What do you see in the file?
-## 2.5 Short Reads Sequencing
+What do you see in the file? What is the difference between a FASTQ and a FASTA file?
 
-When we sequence short reads, we mean that the genomic code (DNA) has been fragmented into small chunks, called 'reads'. We do this because we are unable to sequence very long stretches of DNA, and could potentially lose data. In the wetlab procedure, DNA extraction materials are fragmented with an enzyme called fragmentase. The seqments are amplified using PCR, and then paired together in the library preparation step. This is why data rendered from sequencing will have two files for one sample. One is the forward read, and one is the reverse read. 
+## 2.6 Running Singularity Containers
+Singularity is a software that allows the user to create a 'container' within their system in the cluster. The benefits of using a contained space when doing bioinformatics include:
 
-![SOURCE: https://thesequencingcenter.com/knowledge-base/what-are-paired-end-reads/](https://i.imgur.com/fR9x2vr.jpg)
-SOURCE: [The Sequencing Center](https://thesequencingcenter.com/knowledge-base/what-are-paired-end-reads/)
+1. using software that is not installed on the system
+2. using software that is hard for user to install
+3. using software that only runs on a specific Linux distribution or version
+4. sharing scientific pipeline in a reproducible way
+5. using full scientific pipelines shared by others
+
+*Source: [UCSF](https://wynton.ucsf.edu/hpc/software/singularity.html)*
+
+In this section we will learn how to use singularity containers on HPCC, and run two programs that help with the processing of large FASTQ files.
+
+Please be familiar with the container using following practice:
+
+* copy the folder to your home dirctory
+
+* get into the container
+
+* test the availability of software in the container 
+
 
 ## 2.6 Using FastQC to Evaluate Quality of Reads
 FastQC is a tool used to perform quality control functions on untrimmed sequence data. It will also provide a set of summary statistics that allow us to identify problems in the data before continuing with the pipeline. FastQC creates a file which can be opened outside of your terminal. You can read more about the function of FastQC on the [Babraham Bioinformatics](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) site. Here are links to [bad](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html) and [good](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html) outputs.
@@ -103,7 +150,12 @@ Use CyberDuck to download the FastQC output file, and view it in HTML. What do y
 
 If you find yourself stuck or confused while writing a line of code while using a program, try using the helper printout. For example, FASTQC has a helper document that explains arguments needed for running the program. Access it using `fastqc -h`.
 
-Helper documents for many functions in command line can be accessed by the -h argument. If in-depth help, find the developer's GitHub page.
+Some programs may use `man program` or `program --help` for their help documents. It is also worth looking for the program's webpage to view recent documentation -- the developer may also have set up a help forum or e-mail list to get assistance.
+
+Other good sources of information for UNIX systems is [StackOverflow](https://stackoverflow.com/). More specific help for bioinformatics can be found using [biostars](https://www.biostars.org/), [seqanswers](http://seqanswers.com/), or the [bioinformatics reddit forum](https://www.reddit.com/r/bioinformatics/).
+
+When in doubt, it is frequently useful to use a Google search with the name of the program and the error message. Often, these searches will take you directly to a post on one of the sites mentioned above!
+
 
 ## 2.8 Trimming Data
 We will use FastP to trim down reads before pairing them. We trim reads for many reasons, such as removing the adapter sequences from a read (adapter sequences are critical to the library prep stage, but cause problems in bioinformatics), or to trim out the low quality, short, sections of reads. We want to keep only high quality and longer reads to input into the pipeline. 
