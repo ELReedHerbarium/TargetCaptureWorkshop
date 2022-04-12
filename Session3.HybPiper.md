@@ -36,6 +36,16 @@ Follow the prompts on the screen during installation. The default locations for 
 
 When the installation is finished, you will need to logout from HPCC and log back in (because the script modified your `.bashrc` file)
 
+### Setting up Conda
+
+Conda can install packages from a variety of sources - there are default packages and additional packages in *repositories*. When you install packages with `conda` you need to tell `conda` where to look. For bioinformatics packages, Bioconda is a common respository. You need to set up conda to look in each of these repositories. **Run these commands in order**
+
+```
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+```
+
 ### Installing via Conda
 
 Installing programs and packages with `conda` is (usually) as simple as `conda install packagename`. For this tutorial we will need to install a second package manager `mamba`:
@@ -178,13 +188,6 @@ and
 `SampleName/4471/SampleName/sequences/intron/4471_supercontig.fasta`
 
 Open both in a text editor: **how different are the lengths of the sequences?**
-
-### Getting Sequence Lengths
-
-To get a quick visual summary of our data thus far, we can use `hybpiper get_seq_lengths`.
-
-`hybpiper get_seq_lengths [Hybpiper output files].fasta [namelist].txt dna > [Seq Lengths output filename].txt`
-
 
 
 
