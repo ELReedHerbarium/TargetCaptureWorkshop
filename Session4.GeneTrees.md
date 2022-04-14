@@ -7,7 +7,24 @@ SESSION 4: Gene Tree
 
 In this session we will be using the sequences retrieved from Session 3 and running a few commands to be able to arrange the sequences into a gene tree. 
 
+### Create mamba environment
+
+We will prepare a `mamba` environment as you did in the last session to install the three softwares we will use today: `mafft`, `trimal`, and `iqtree`
+
+```
+mamba create -n phylo mafft trimal iqtree
+```
+
+Activate your new mamba environment with `mamba activate phylo`
+
 ### MAFFT
+
+When recovering sequences using HybPiper, as we did last session, the sequences are recovered *unaligned*:
+
+![](https://i.imgur.com/4VJzU9R.png)
+
+To properly infer a phylogeny, we wll need to *align* the sequences, so that each column represents homology (shared ancestry). 
+
 The Multiple Alignment using Fast Fourier Transform (MAFFT) pipeline is a command used to create multiple sequence alignments of amino acids or nucleotide sequences from raw sequences. This is an important tool for analysis of the sequences.
 
 To get started, you will need to go to the directory that has your sequences you previously ran in session 3.
@@ -28,9 +45,13 @@ Before running this command, it is in your best interest to make a directory nam
 
 
 
-`MAFFT/{}.mafft.fasta` is my new file with the aligned sequences.
+`MAFFT/{}.mafft.fasta` is my new file with the aligned sequences. An alignment may look like this: 
+
+![](https://i.imgur.com/2g9ywgh.png)
 
 ### Trimal
+Aligned sequences are ready for phylogenetic inference, but as you can see above there are multiple parts of the alignment that are not present in every sample. If these *gaps* are too frequent, it can negatively affect the inference of the gene tree.
+
 Trimal is a command that is used to automatically remove any illegitimate or poorly aligned sections from the multiple aligned sequences. Trimal is used to make the alignments an ideal size for placing them on a tree.
 
 Here is the base command for running trimal
@@ -54,6 +75,10 @@ Use the space below to show how you will run the trimal command
 ```
 ```
 
+A trimmed alignment might look like this:
+
+![](https://i.imgur.com/JBNwhvi.png)
+
 
 ### IQ Tree
 IQ tree command will take your input of multiple sequence alignment and will reconstruct a phylogeny that is best explained by your input data.
@@ -72,11 +97,16 @@ You will receive three output files after running IQtree.
     
     $name.fasta.log
     
-.iqtree is the main file that you should look at to see the calculations. It also contains view of the final tree.
+.iqtree is the main file that you should look at to see the calculations. It also contains a view of the final tree in text format.
 
-.treefile is the evolutionary tree that can be viewed in programs like FigTree and iTOL.
+.treefile is the evolutionary tree that can be viewed in programs like [FigTree](http://tree.bio.ed.ac.uk/software/figtree/) and [iTOL](https://itol.embl.de/).
 
 .log is a file of the entire command run.
+
+Here's what a tree file for your gene tree might look like:
+![](https://i.imgur.com/tr1AOtp.png)
+
+
 #### Determing what model is best
 IQtree supports a wide range of models for DNA, protein, codons, binary and nonbinary alignments. If you are not sure which model to use for your file you can run ModelFinder to figure out which is best.
 
@@ -95,4 +125,9 @@ Use the space below to show how you will run IQtree
 
 ```
 ```
+
+A tree with bootstrap labels might look like this:
+
+![](https://i.imgur.com/QDkFkEn.png)
+
 
