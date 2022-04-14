@@ -9,6 +9,8 @@ In this session we will be using the sequences retrieved from Session 3 and runn
 
 ### Create mamba environment
 
+Login to HPCC as you have done in previous sessions.
+
 We will prepare a `mamba` environment as you did in the last session to install the three softwares we will use today: `mafft`, `trimal`, and `iqtree`
 
 ```
@@ -16,6 +18,8 @@ mamba create -n phylo mafft trimal iqtree
 ```
 
 Activate your new mamba environment with `mamba activate phylo`
+
+Next, reserve an interactive session on HPCC as you've done in previous sessions.
 
 ### MAFFT
 
@@ -29,6 +33,10 @@ The Multiple Alignment using Fast Fourier Transform (MAFFT) pipeline is a comman
 
 To get started, you will need to go to the directory that has your sequences you previously ran in session 3.
 
+First, create a new directory for your MAFFT output:
+
+`mkdir MAFFT`
+
 Here is the base command for running MAFFT
 
 `mafft --preservecase --maxiterate 1000 --localpair input.fasta > output.fasta`
@@ -41,8 +49,9 @@ Here is the base command for running MAFFT
 
 Before running this command, it is in your best interest to make a directory named MAFFT so the command will send the data to that directory and your current directory remains less cluttered.
 
-`"mafft --preservecase --maxiterate 1000 --localpair [YourSequenceDirectory]/[yourfilename]_supercontig.fasta > MAFFT/[yourfilename].mafft.fasta" :::: [namelist].txt`
-
+```
+mafft --preservecase --maxiterate 1000 --localpair [YourSequenceDirectory]/[yourfilename]_supercontig.fasta > MAFFT/[yourfilename].mafft.fasta
+```
 
 
 `MAFFT/{}.mafft.fasta` is my new file with the aligned sequences. An alignment may look like this: 
@@ -54,6 +63,10 @@ Aligned sequences are ready for phylogenetic inference, but as you can see above
 
 Trimal is a command that is used to automatically remove any illegitimate or poorly aligned sections from the multiple aligned sequences. Trimal is used to make the alignments an ideal size for placing them on a tree.
 
+First, make a directory for Trimal output:
+
+`mkdir trimal`
+
 Here is the base command for running trimal
 
 `trimal -in <inputfile> -out <outputfile> -(other options)`
@@ -64,7 +77,7 @@ Then you will need to tell the command where you want your output file (-out) to
 
 Example
 
-`trimal -in [DirectorywhereMAFFTfileIs]/$name.mafft.fasta -out [DirectoryWhereyouWantFiletoGo]/$name.trimal.fasta -gt .5 :::: genelist.txt`
+`trimal -in [DirectorywhereMAFFTfileIs]/$name.mafft.fasta -out [DirectoryWhereyouWantFiletoGo]/$name.trimal.fasta -gt .5`
 
 `-gt` is an option that tells trimal how big of a gap is allowed in that fraction of the sequence.
 
@@ -84,6 +97,12 @@ A trimmed alignment might look like this:
 IQ tree command will take your input of multiple sequence alignment and will reconstruct a phylogeny that is best explained by your input data.
 
 We can now start to reconstruct a maximum-likelihood tree from the alignments you received. Make sure you are in the same directory as your trimal file.
+
+First, change to the trimal output directory:
+
+`cd trimal`
+
+Next, run IQTree on the trimal output file:
 
 `iqtree -s $name.fasta`
 
