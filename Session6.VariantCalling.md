@@ -31,13 +31,26 @@ mamba activate variantcall
 Calling variants always requires sequencing reads and a reference genome. Because targeted sequencing frequently uses non-model organisms, there often is not a genome available. We will create a reference file for a single sample using the "supercontig" output of HybPiper (exons and flanking non-coding regions). If you did not run `hybpiper assemble` with the `--run_intronerate` flag in Session 3, go back and do that now before continuing.
 
 #### Action 3.1.1
-Concatenate all supercontigs into one single reference file for your species. If the output directory for your HybPiper run is called `prefix` the supercontigs can be recovered with:
+
+If you are in the new `variantcall` mamba environment, deactivate it and re-activate the `hybpiper` environment:
 
 ```
-cat prefix/*/prefix/sequences/intron/*_supercontig.fasta > prefix.supercontigs.fasta
+mamba deactivate
 ```
 
-*Note: `prefix.supercontigs.fasta` will be used as an input on command line along with* `samplename` below.
+```
+mamba activate hybpiper
+```
+
+The `hybpiper retrieve_sequences` command can concatenate all supercontigs into one single reference file for your species. If the output directory for your HybPiper run is called `prefix` the supercontigs can be recovered with:
+
+```
+hybpiper retrieve_sequences --single_sample_name prefix mega353.fasta supercontig
+```
+
+This will create a file in your current directory called `supercontig.fasta`
+
+You can now deactivate the `hybpiper` environment and reactivate the `variantcall` environment.
 
 
 ### Call SNP Variants Against Reference
