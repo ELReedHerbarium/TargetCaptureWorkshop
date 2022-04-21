@@ -44,7 +44,7 @@ cat prefix/*/prefix/sequences/intron/*_supercontig.fasta > prefix.supercontigs.f
 
 The following section will make use of a "Shell Script" to execute many commands on the same set of input files.
 
-Copy the `variantcall.sh` script from: `/home/joh97948/TC_Workshop/variantcall.sh`
+Copy the `variantcall.sh` script from: `/home/joh97948/TC_workshop/variantcall.sh`
 
 ```
 
@@ -95,14 +95,16 @@ You can use the SFTP/SSH client BitVise or CyberDuck to transfer the following f
 
 - reference supercontigs `prefix.supercontigs.fasta`
 - index file for supercontigs `prefix.supercontigs.fasta.fai`
-- VCF file of filtered SNPs ``
-- indexed VCF file 
+- merged, deduplicated alignment file `prefix.marked.bam`
+- index of BAM file `prefix.marked.bam.bai`
+- VCF file of filtered SNPs `prefix.snpfiltered.vcf`
+- indexed VCF file `prefix.snpfiltered.vcf.idx`
 
 
 ### IGV
 
 The [Integrative Genome Viewer online app](https://igv.org/app/) can be used to view the reference supercontigs and filtered SNPs. You will be able to see the depth of sequences and the locations of variants within the sample (heterozygous sites).
 
-Load the `fasta` file as the "Genome" and the VCF file as a "Track". Navigate from gene to gene to explore the variation within the sample at different genes.
+Load the `fasta` file as the "Genome" and the VCF and BAM files as a "Track". Navigate from gene to gene to explore the variation within the sample at different genes.
 
 An IGV viewer guide can be found here: https://software.broadinstitute.org/software/igv/UserGuide
