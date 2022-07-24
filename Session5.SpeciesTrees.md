@@ -60,6 +60,14 @@ This provides the executable script `astral` which is a wrapper around the Java 
 
 The ASTRAL input file is a file containing gene trees inferred from the same taxa. This may be a file you completed in a previous section, or you can download a set of gene tree files from the GitHub repository for this workshop.
 
+First, create a single file containing all the gene tree files:
+
+
+```
+cat *.treefile > genetrees.tre
+```
+
+
 The gene trees you download (or produce from IQTree in the previous session) are fully bifurcating. However, ASTRAL will consider every branch when estimating its Maximum Quartet Species Tree. There is some debate about whether unsupported branches in gene trees can contribute to poorly resolved ASTRAL trees.
 
 We can use the `nw_ed` tool in Newick Utils to collapse gene tree branches below a certain gene tree bootstrap value threshold. For example, to collapse all branches below 50% bootstrap support:
