@@ -1,4 +1,7 @@
+
+
 ###### tags: `target_capture_workshop`
+This section of the target capture workshop defines and elaborates on 'bioinformatics' as a term. We will also go through the roles of a bioinformaticist, and what projects a bioinformaticist might work on. The workshop leaders will share what bioinformatics projects they have worked on. Then, we will learn about sequence files and further, learn how to quality check them before doing analysis.
 # SESSION 2: BIOINFORMATICS IN PLANT RESEARCH AND SEQUENCE FILES
 
 [TOC]
@@ -13,13 +16,13 @@ While the bioinformatics portion of a research project is challenging by itself,
 5. Dry Lab/ Data Analysis
 6. Writing and Publication
 
-Fieldwork and collections takes a long time to plan and perform, especially if your collections will require extensive travel and funding. Careful consideration into species selection, permit applications, and storage will be required. As a bioinformaticist, why would this be critical to your role on the project? You should make yourself aware of the condition of your collection- are you using degraded herbarium specimens? Do you have enough of a sample to be able to rerun if recovery is poor?
+Fieldwork and collections takes a long time to plan and perform, especially if your collections will require extensive travel, funding, and permissions. Careful consideration into species selection, permit applications, and storage will be required. As a bioinformaticist, why would this be critical to your role on the project? You should make yourself aware of the condition of your collection- are you using degraded herbarium specimens? Are your samples ancient? Does your species have a reference genome? Do you have enough of a sample to be able to rerun if coverage is low?
 
 Botanists are encouraged to create vouchers for collections made, in order to store and preserve the physical and chemical properties of the samples long-term. Each sample taken during field work must be recorded and given a unique identifier, in order to connect the specimen to the sequencing data. Your work in bioinformatics may have to be retracable to specific specimens.
 
 Wet lab procedures, including enzymatic fragmentation, pooling, concentration, will affect either the quality of data, or the way your data can be interpreted bioinformatically.
 
-Sequencing will be completed by either a third-party, or within your lab. It will be the job of the bioinformaticist to recieve and interpret files when they arrive from the sequencing service.
+Sequencing will be completed by either a third-party, or within your institution. It will be the job of the bioinformaticist to recieve and interpret files when they arrive from the sequencing service.
 
 Dry Lab/ Data Analysis is where a bioinformaticist processes, inteprets, and displays data. This workshop teaches skills needed to complete this step of the research process.
 
@@ -65,10 +68,10 @@ Right-click on the link to the `.fastq.gz` file and use `wget` to download the f
 
 **Expected Results**
 
-After downloading both read files for your sample, your `TC_Workshop` directory should look something like this:
+After downloading both read files for your sample, your `TCWorkshop` directory should look something like this:
 
 ```
-[cpu-23-37 TC_workshop]$ ls
+[cpu-23-37 TC_Workshop]$ ls
 INSDC.ERR5034798.Afrofittonia_silvestris.a353.fasta  Test1
 SRR7451100_1.fastq.gz                                Test2
 SRR7451100_2.fastq.gz
@@ -88,7 +91,7 @@ Unzipped FASTA files look like this:
 
 
 ### Action 2.5.1: gunzip
-*Use the `gunzip` comand to unzip your files*
+*Use the `gunzip` command to unzip your files*
 ```
 
 ```
@@ -105,26 +108,80 @@ You can also use the commands `head` and `tail`. These commands are convenient f
 
 What do you see in the file? What is the difference between a FASTQ and a FASTA file?
 
-## 2.6 Running Singularity Containers
-Singularity is a software that allows the user to create a 'container' within their system in the cluster. The benefits of using a contained space when doing bioinformatics include:
+## 2.6 Managing Programs with Conda
 
-1. using software that is not installed on the system
-2. using software that is hard for user to install
-3. using software that only runs on a specific Linux distribution or version
-4. sharing scientific pipeline in a reproducible way
-5. using full scientific pipelines shared by others
+It can be a challenge to maintain programs on a remote system, especially if the programs are only distributed as source code and need to be compiled on each system separately. In Bioinformatics, often different workflows require different versions of the same software, and these can also be very difficult to maintain.
 
-*Source: [UCSF](https://wynton.ucsf.edu/hpc/software/singularity.html)*
+You have already seen one solution to this issue (Singularity), and this week we will introduce another solution: `conda`. [From the Conda website](https://docs.conda.io/en/latest/):
 
-In this section we will learn how to use singularity containers on HPCC, and run two programs that help with the processing of large FASTQ files.
+> Conda is an open source package management system and environment management system that runs on Windows, macOS and Linux. Conda quickly installs, runs and updates packages and their dependencies. Conda easily creates, saves, loads and switches between environments on your local computer. It was created for Python programs, but it can package and distribute software for any language.
 
-Please be familiar with the container using following practice:
+### Installing Conda
+**Installing Conda is not needed for continuing the workshop as we will be using mamba, but if you would like to install it on your personal computer, follow these steps:**
 
-* copy the folder to your home dirctory
+To use Conda, you will need to run the basic installation script. We will be using a version of conda known as "Miniconda" that has a small number of packages included. In a web browser navigate to the [MiniConda installation page](https://docs.conda.io/en/latest/miniconda.html). 
+ 
 
-* get into the container
+Right-click on the `Miniconda3 Linux 64-bit` link and select "Copy Link Address"
 
-* test the availability of software in the container 
+In your remote login terminal use `wget` to download the Miniconda installation script:
+
+```
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+```
+
+Once the script downloads, you will need to run the script:
+
+```
+bash Miniconda3-latest-Linux-x86_64.sh
+```
+
+Follow the prompts on the screen during installation. The default locations for folders will be fine for this tutorial.
+
+When the installation is finished, you will need to logout from JupyterLab and log back in (because the script modified your `.bashrc` file)
+
+### Installing required packages
+
+Conda can install packages from a variety of sources - there are default packages and additional packages in *repositories*. When you install packages with `conda` you need to tell `conda` where to look. For bioinformatics packages, Bioconda is a common respository. You need to set up conda to look in each of these repositories. **Run these commands in order**
+
+```
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+```
+
+
+### Creating a Mamba environment
+
+Mamba is already installed on Cyverse, so you are ready to create your first environment. Each environment will contain a separate version of Python and any other software you choose to install. 
+
+This week, we will be working with the quality filtering programs, so we will name our environment accordingly:
+
+```
+mamba create -n filter
+```
+
+Follow the on-screen prompts as the environment is created. Once the evnironment is created, close and reopen the terminal and initiate mamba again
+
+`mamba init`
+
+activate it with:
+
+```
+mamba activate filter
+```
+
+Note that your command prompt has changed with `(filter)` at the beginning to indicate what environment you are in. If you ever need to get out of the envirnoment, use `mamba deactivate`.
+
+### Installing Software in a Conda Environment
+
+Make sure you have the HybPiper environment active by checking that your command prompt begeins with `(filter)` Then install `fastp` and `fastqc` with this command:
+
+```
+mamba install -c bioconda fastp fastqc
+```
+
+Here, the `-c` is telling `mamba` to look for a package called `fastp` and `fastqc`. 
 
 
 ## 2.6 Using FastQC to Evaluate Quality of Reads
@@ -145,7 +202,7 @@ Below are the arguments:
 
 ```
 
-Use CyberDuck to download the FastQC output file, and view it in HTML. What do you see? Would you consider this a good or bad output?
+On the GUI to the left of the screen, navigate into your current directory and left click on the fastqc output files and download them. You may need to unzip them to view.
 ## 2.7 Flags and Helper Documents
 
 If you find yourself stuck or confused while writing a line of code while using a program, try using the helper printout. For example, FASTQC has a helper document that explains arguments needed for running the program. Access it using `fastqc -h`.
@@ -173,7 +230,7 @@ SOURCE: [OpenGene/ FastP Github Page](https://github.com/OpenGene/fastp)
 In addition to the simple usage of FastP, we also need to add additional arguments for the type of data we have. The instructors will inform you of additional arguments needed based on the data set you use.
 
 
-### Action 2.8.1
+### Action 2.9.1
 *Try adapting the simple usage code for your dataset.*
 ```
 
