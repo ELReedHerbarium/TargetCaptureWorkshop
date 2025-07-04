@@ -20,7 +20,7 @@ Reconstructing species tree is an essential step into assessing relationships am
 
 Figure 1. Deep coalescence may cause discordance between gene tree and species tree.
 
-More information about why gene trees often do not agree with species tree, you can refer to [Szöllősi et al.](https://doi.org/10.1093/sysbio/syu048)
+More information about why gene trees often do not agree with species tree, you can refer to [Szöllősi et al. 2015](https://doi.org/10.1093/sysbio/syu048)
 ## 5.2 How to infer phylogenies of species?
 There are two major ways in inferring species tree. First and simple one is to use a concatenated dataset, which refers to **concatenation**. To apply this method, every gene will be added together and aligned into a supermatrix. Then, further phylogenetic inferences will be deployed onto this concatenated gene which will be treated as a single gene complex. 
 
@@ -30,27 +30,27 @@ In order to solve the problem of deep coalescence in species tree reconstruction
 
 ![image](https://user-images.githubusercontent.com/16470742/143940257-bec4517c-f3df-4b03-8e38-fc6239745896.png "Fig 2 Species Tree Methods")
 
-Figure 2. Schematic of the concatenation and coalescent paradigms in phylogenetics. ([Liu et al.](https://nyaspubs.onlinelibrary.wiley.com/doi/full/10.1111/nyas.12747))
+Figure 2. Schematic of the concatenation and coalescent paradigms in phylogenetics. ([Liu et al. 2015](https://nyaspubs.onlinelibrary.wiley.com/doi/full/10.1111/nyas.12747))
 
 ## 5.3 Practicing species tree method using ASTRAL
 In today's workshop, we will use [ASTRAL](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2129-y) first, one of the shortcuts methods, to infer our species tree from our gene tree datasets. 
 
 ASTRAL is a Java phylogenetics program that uses the frequency of quartets in gene trees to estimate a species tree. It offers a one command line solution under Linux. Comparing these quartets is not computational intense so this program may finish in a short time. However, to be consistent to other sessions in our workshop, we will still run this under HPCC job submitting system.
 
-Load up the Cyverse Discovery environment and access the terminal. As before we will create a `mamba` environment for this session and install packages.
+Load up the Cyverse Discovery environment and access the terminal. As before we will create a `conda` environment for this session and install packages.
 
 ```
-mamba create -n species_trees
-mamba activate species_trees
+conda create -n species_trees
+conda activate species_trees
 ```
 
-In some cases you may need to switch to environments used in previous sessions; for this you can use `mamba deactivate.`
+In some cases you may need to switch to environments used in previous sessions; for this you can use `conda deactivate.`
 
-We will install packages using `mamba` as in previous sessions:
+We will install packages using `conda` as in previous sessions:
 
 
 ```bash
-mamba install astral-tree newick_utils msaconverter
+conda install astral-tree newick_utils msaconverter
 ```
 
 This provides the executable script `astral` which is a wrapper around the Java program; [Newick Utils](https://github.com/tjunier/newick_utils), a set of helper scripts for working with phylogenetic tree files; and [msaconverter](https://github.com/linzhi2013/msaconverter), a handy script for converting DNA sequence alignment files.
