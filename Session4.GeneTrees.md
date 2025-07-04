@@ -20,7 +20,7 @@ Copy the unaligned sequences to your current directory and uncompress the file:
 
 `tar -zxf workshop_paftol_dna.tar.gz`
 
-The `workshop_paftol_dna` directory will have 353 FASTA files. Each file will have sequeces from the same 50 taxa. Not all files will have 50 sequences, as we did not recover all genes for all samples.
+The `workshop_paftol_dna` directory will have 353 FASTA files. Each file will have sequences from the same 50 taxa. Not all files will have 50 sequences, as we did not recover all genes for all samples.
 
 We will need to make a list of gene names for the next steps. Here you will learn some quick UNIX tricks working with text:
 
@@ -38,17 +38,17 @@ ls *.fasta | cut -f 1 -d '.' > genelist.txt
 Congratulations, you've just written a "pipeline" - a set of UNIX commands that uses the `|` and `>` characters to direct output of one program to another!
 
 
-### Create mamba environment
+### Create conda environment
 
 
 
-We will prepare a `mamba` environment as you did in the last session to install the three softwares we will use today: `mafft`, `trimal`, and `iqtree`
+We will prepare a `conda` environment as you did in the last session to install the three softwares we will use today: `mafft`, `trimal`, and `iqtree`
 
 ```
-mamba create -n phylo mafft trimal iqtree parallel
+conda create -n phylo mafft trimal iqtree parallel
 ```
 
-Activate your new mamba environment with `mamba activate phylo`
+Activate your new mamba environment with `conda activate phylo`
 
 
 ### MAFFT
