@@ -4,37 +4,37 @@
 [TOC]
 
 
-## 3.0 Creating a Mamba environment
+## 3.0 Creating a Conda environment
 
 We will be working with the bioinformatics pipeline `hybpiper` so we will create a new environment named `hybpiper`:
 
 ```
-mamba create -n hybpiper
+conda create -n hybpiper
 ```
 
 Follow the on-screen prompts as the environment is created. Once the evnironment is created, activate it with:
 
 ```
-mamba activate hybpiper
-OR
 conda activate hybpiper
 ```
 
-Note that your command prompt has changed with `(hybpiper)` at the beginning to indicate what environment you are in. If you ever need to get out of the environment, use `mamba deactivate`.
+Note that your command prompt has changed with `(hybpiper)` at the beginning to indicate what environment you are in. If you ever need to get out of the environment, use `conda deactivate`.
 
 ### Installing Software in a Conda Environment
 
-Make sure you have the HybPiper environment active by checking that your command prompt begins with `(hybpiper)` Then install `hybpiper` and `time` with these commands:
+Make sure you have the HybPiper environment active by checking that your command prompt begins with `(hybpiper)` Then install `hybpiper` with these commands:
 
 ```
+conda config --add channels defaults
+
 conda config --add channels bioconda
 
-mamba install -c chrisjackson-pellicle hybpiper
+conda config --add channels conda-forge
 
-mamba install time
+conda install -c chrisjackson-pellicle hybpiper
 ```
 
-The installation will take a few minutes. Here, the `-c` is telling `mamba` to look for a package called `hybpiper` within a specific repository (in this case belonging to `chrisjackson-pellicle`, one of the developers of HybPiper). The package repository has a list of required package (prerequisites) that it will also install. 
+The installation will take a few minutes. Here, the `-c` is telling `conda` to look for a package called `hybpiper` within a specific repository (in this case belonging to `chrisjackson-pellicle`, one of the developers of HybPiper). The package repository has a list of required package (prerequisites) that it will also install. 
 
 
 
@@ -49,7 +49,7 @@ HybPiper runs the following tools in this order:
 
 ### Accessing your Target File
 
-First, we will need a FASTA file containing the target genes selected for the dataset. Your target file, if used with a specific kit, can be downloaded from online and FTPed using CyberDuck into your terminal. If you have made your own probes, you will have to create this file yourself.
+First, we will need a FASTA file containing the target genes selected for the dataset. Your target file, if used with a specific kit, can be downloaded from online and FTPed using CyberDuck or Bitvise into your terminal. If you have made your own probes, you will have to create this file yourself.
 
 The reads you downloaded in the previous section were generated with the [Angiosperms353 targeted sequencing kit](https://arborbiosci.com/genomics/targeted-sequencing/mybaits/mybaits-expert/mybaits-expert-angiosperms-353/), so we will use the following file 
 
@@ -72,7 +72,7 @@ unzip mega353.fasta.zip
 
 With these two files, we are able to run the first HybPiper command, `hybpiper assemble`. The arguments for this command are as follows:
 
-> `hybpiper assemble -t_dna [Target File].fasta -r [Sample File].fastq --prefix [Output filename] --bwa --cpu N`
+> `hybpiper assemble -t_dna [Target File].fasta -r [Sample File].fastq --prefix [Output Filename] -o [Output Directory] --bwa --cpu N`
  
 `assemble` is the python code which will run this portion of HybPiper.
  
@@ -85,6 +85,8 @@ The sample file fastq file(s) (`-r`) indicates which sample we will be running. 
  `--prefix` will control the name of the output files.
  
 `--cpu` specifies the number of processors used by HybPiper. For today, you can use 4.
+
+`-o` dictates what directory your hybpiper output will be put in. This is optional and without it, hybpiper will output to the current directory. This is particularly helpful if running hybpiper on multiple samples at ones.
 
 
 #### Action 3.2
@@ -105,20 +107,15 @@ For example, to find the sequences recovered for gene `4471` for a sample with t
 
 Inside the output directory, the file `genes_with_seqs.txt` contains a list of all the genes with recovered sequences. How many genes were recovered for your sample?
 
-Use CyberDuck to access the HybPiper output directory and navigate the directories within each gene. Does your sample have a sequence recovered for the following genes:
+Use CyberDuck or Bitvise to access the HybPiper output directory and navigate the directories within each gene. Does your sample have a sequence recovered for the following genes:
 * `4471`
 * `6969`
 * `7628`
 
 
 ### Supercontigs
-A supercontig is an ordered set of contigs, creating a portion of the genome. A singular contig is a continuous length of sequence that we are very sure the order of bases is. A supercontig is a larger portion of the genome reconstructed using these smalled contigs, creating a sequence with a few gaps. To recover the supercontigs we will need to re-run `hybpiper assemble` but now with some additional flags:
+A supercontig is an ordered set of contigs, creating a portion of the genome. A singular contig is a continuous length of sequence that we are very sure the order of bases is. A supercontig is a larger portion of the genome reconstructed using these smalled contigs, creating a sequence with a few gaps. HybPiper automatically recovers the supercontigs per sample per gene, and outputs a `_supercontig.fasta` file.
 
-```
---run_intronerate --start_from exonerate_contigs
-```
-
-The `--run_intronerate` flag recovers regions flanking the targeted exons, while the `--start_from` command skips the earlier parts of the workflow.
 
 #### Action 3.4
 
@@ -132,7 +129,7 @@ and
 
 `SampleName/4471/SampleName/sequences/intron/4471_supercontig.fasta`
 
-Open both in a text editor: **how different are the lengths of the sequences?**
+Open both in a text editor such as Notepad++: **how different are the lengths of the sequences?**
 
 
 
@@ -145,6 +142,7 @@ usage: hybpiper stats [-h]
                       (--targetfile_dna TARGETFILE_DNA | --targetfile_aa TARGETFILE_AA)
                       [--seq_lengths_filename SEQ_LENGTHS_FILENAME]
                       [--stats_filename STATS_FILENAME]
+                      [--hybpiper_dir HYBPIPER_DIR]
                       {gene,GENE,supercontig,SUPERCONTIG} namelist
 ```
 
