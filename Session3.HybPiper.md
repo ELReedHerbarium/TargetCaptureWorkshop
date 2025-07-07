@@ -31,7 +31,7 @@ conda config --add channels bioconda
 
 conda config --add channels conda-forge
 
-conda install -c chrisjackson-pellicle hybpiper
+conda install -c bioconda hybpiper
 ```
 
 The installation will take a few minutes. Here, the `-c` is telling `conda` to look for a package called `hybpiper` within a specific repository (in this case belonging to `chrisjackson-pellicle`, one of the developers of HybPiper). The package repository has a list of required package (prerequisites) that it will also install. 
@@ -72,7 +72,7 @@ unzip mega353.fasta.zip
 
 With these two files, we are able to run the first HybPiper command, `hybpiper assemble`. The arguments for this command are as follows:
 
-> `hybpiper assemble -t_dna [Target File].fasta -r [Sample File].fastq --prefix [Output Filename] -o [Output Directory] --bwa --cpu N`
+> `hybpiper assemble -t_dna [Target File].fasta -r [Read File 1].fastq [Read File 2].fastq --prefix [Output Filename] -o [Output Directory] --bwa --cpu N`
  
 `assemble` is the python code which will run this portion of HybPiper.
  
