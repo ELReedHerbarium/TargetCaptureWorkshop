@@ -33,7 +33,7 @@ All computers allow you access to a terminal, which is a window that allows you 
 
 After you are given access to the discovery environment, a pop-up will appear, asking if you would like a walk-through of the discovery environment. Read and click through to become familliar with the webpage.
 
-We will be using JupyterLab to launch a terminal. Follow this [link](https://de.cyverse.org/apps/de/cc77b788-bc45-11eb-9934-008cfa5ae621/launch), or type in 'JupyterLab' into the DiscoveryEnvironment search bar.
+We will be using JupyterLab to launch a terminal. Type in 'JupyterLab' into the DiscoveryEnvironment search bar.
 
 Click 'Next' on all of the pages, and then click 'Go to Analysis'.
 ![](https://i.imgur.com/PtVsBI3.jpg)
