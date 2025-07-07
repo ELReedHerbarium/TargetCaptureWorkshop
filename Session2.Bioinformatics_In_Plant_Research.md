@@ -117,8 +117,6 @@ You have already seen one solution to this issue (Singularity), and this week we
 > Conda is an open source package management system and environment management system that runs on Windows, macOS and Linux. Conda quickly installs, runs and updates packages and their dependencies. Conda easily creates, saves, loads and switches between environments on your local computer. It was created for Python programs, but it can package and distribute software for any language.
 
 ### Installing Conda
-**Installing Conda is not needed for continuing the workshop as we will be using mamba, but if you would like to install it on your personal computer, follow these steps:**
-
 To use Conda, you will need to run the basic installation script. We will be using a version of conda known as "Miniconda" that has a small number of packages included. In a web browser navigate to the [MiniConda installation page](https://docs.conda.io/en/latest/miniconda.html). 
  
 
@@ -138,7 +136,13 @@ bash Miniconda3-latest-Linux-x86_64.sh
 
 Follow the prompts on the screen during installation. The default locations for folders will be fine for this tutorial.
 
-When the installation is finished, you will need to logout from JupyterLab and log back in (because the script modified your `.bashrc` file)
+When the installation is finished, you will need to logout from JupyterLab and log back in (because the script modified your `.bashrc` file).
+
+To finish installing `mamba`:
+
+```
+conda install mamba
+```
 
 ### Installing required packages
 
@@ -151,24 +155,21 @@ conda config --add channels conda-forge
 ```
 
 
-### Creating a Mamba environment
+### Creating a Conda environment
 
 Mamba is already installed on Cyverse, so you are ready to create your first environment. Each environment will contain a separate version of Python and any other software you choose to install. 
 
-This week, we will be working with the quality filtering programs, so we will name our environment accordingly:
+This session, we will be working with the quality filtering programs, so we will name our environment accordingly:
 
 ```
-mamba create -n filter
+conda create -n filter
 ```
 
-Follow the on-screen prompts as the environment is created. Once the evnironment is created, close and reopen the terminal and initiate mamba again
-
-`mamba init`
 
 activate it with:
 
 ```
-mamba activate filter
+conda activate filter
 ```
 
 Note that your command prompt has changed with `(filter)` at the beginning to indicate what environment you are in. If you ever need to get out of the envirnoment, use `mamba deactivate`.
@@ -178,7 +179,7 @@ Note that your command prompt has changed with `(filter)` at the beginning to in
 Make sure you have the HybPiper environment active by checking that your command prompt begeins with `(filter)` Then install `fastp` and `fastqc` with this command:
 
 ```
-mamba install -c bioconda fastp fastqc
+conda install -c bioconda fastp fastqc
 ```
 
 Here, the `-c` is telling `mamba` to look for a package called `fastp` and `fastqc`. 
