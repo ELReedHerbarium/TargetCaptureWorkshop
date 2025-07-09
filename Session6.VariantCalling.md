@@ -114,6 +114,33 @@ Use the Data browser in the Discovery Environment on Cyverse to transfer the fol
 - VCF file of filtered SNPs `prefix.snpfiltered.vcf.gz`
 - indexed VCF file `prefix.snpfiltered.vcf.idx`
 
+### Multiple Samples
+
+The above exercise only maps one read against itself, so it will only reveal information within one sample.
+To see variation across multiple individuals, a couple of modifications are needed:
+
+### Action 3.2.3
+
+1. Open the `variantcall.sh` script in a text editor and modify the line with the HaplotypeCaller:
+`gatk HaplotypeCaller -I $prefix.marked.bam -O $prefix.g.vcf.gz -R $reference --ERC GVCF`
+
+2. Delete all the instructions in the script after this command, EXCEPT for the last line that removes all the intermediate files.
+
+3. You will need to run the `variantcall.sh` script separately for each sample in your dataset. For example:
+
+```
+variantcall.sh reference.fasta prefix1
+variantcall.sh reference.fasta prefix2
+variantcall.sh reference.fasta prefix3
+```
+
+The output should be a `.g.vcf` file for each sample.
+
+### Combining GVCFs
+
+After the initial GVCFs are generated, one per sample, they need to be combined before running all of them combined.
+
+
 
 ### IGV
 
