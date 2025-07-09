@@ -46,7 +46,7 @@ This will create a file in your current directory called `prefix.supercontig.fas
 ### Create a conda environment
 
 ```
-conda create -n variantcall gatk4 bwa samtools whatshap
+conda create -n variantcall gatk4 bwa samtools whatshap plink
 ```
 
 Once the installation is complete, activate the conda environment:
@@ -129,9 +129,9 @@ To see variation across multiple individuals, a couple of modifications are need
 3. You will need to run the `variantcall.sh` script separately for each sample in your dataset. For example:
 
 ```
-variantcall.sh reference.fasta prefix1
-variantcall.sh reference.fasta prefix2
-variantcall.sh reference.fasta prefix3
+bash variantcall.sh reference.fasta prefix1
+bash variantcall.sh reference.fasta prefix2
+bash variantcall.sh reference.fasta prefix3
 ```
 
 The output should be a `.g.vcf` file for each sample.
@@ -139,6 +139,44 @@ The output should be a `.g.vcf` file for each sample.
 ### Combining GVCFs
 
 After the initial GVCFs are generated, one per sample, they need to be combined before running all of them combined.
+
+Make another copy of the `variantcall.sh` and rename it to `genotypes2PCA.sh`. 
+
+In a text editor, modify `genotypes2PCA.sh`:
+
+1. Delete the commands after `prefix=$2` down to `gatk HaplotypeCaller`
+
+2. After `prefix=$2` add the following text:
+
+```
+#Make Samples list
+ls */*.g.vcf > samples.list
+
+# Combine and Jointly call GVCFs
+gatk CombineGVCFs -R $reference --variant samples.list --output "$prefix".cohort.g.vcf
+
+gatk GenotypeGVCFs -R $reference -V "$prefix".cohort.g.vcf -O "$prefix".cohort.unfiltered.vcf
+```
+
+3. Save the file and run the `genotypes2PCA.sh` script like this:
+
+```
+bash genotypes2PCA.sh reference.fasta species_name
+```
+
+The output files will have a prefix that corresponds to the `species_name` argument in the command above.
+
+
+### Getting population stats
+
+Use the `plink_stats.sh` script in the `scripts` folder of this GitHub repository to filter the SNPs from a combined dataset and get some basic statistics about the population.
+The script takes one argument:
+
+```
+bash plink_stats.sh species_name
+```
+
+The output of the script will be serveral files including ones that report the heterozygosity of each individual and PCA eigenvalues for each individual based on a genetic distance matrix.
 
 
 
